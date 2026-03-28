@@ -3,6 +3,7 @@ import axios from 'axios';
 import { motion } from 'framer-motion';
 import { useLocation } from 'react-router-dom';
 import BubblesBg from '../components/BubblesBg';
+import API_BASE_URL from '../config/api';
 
 import {
   TextField,
@@ -54,7 +55,7 @@ export default function Dashboard() {
   }, [location.state]);
 
   const fetchUsers = async () => {
-    const res = await axios.get('http://localhost:5000/api/users');
+    const res = await axios.get(`${API_BASE_URL}/api/users`);
     setUsers(res.data);
   };
 
@@ -67,7 +68,7 @@ export default function Dashboard() {
     }
 
     const res = await axios.get(
-      `http://localhost:5000/api/users/search/${value}`
+      `${API_BASE_URL}/api/users/search/${encodeURIComponent(value)}`
     );
     setUsers(res.data);
   };
